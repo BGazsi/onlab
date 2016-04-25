@@ -3,8 +3,9 @@ $(document).ready(function() {
 });
 
 var getMessages = function() {
-	console.log('lofasz');
+
   $.get('getMessages', function(data) {
-    console.log(data);
-  })
+    console.log('get lefutott');
+    setTimeout(getMessages, 2500);
+  });
 };
