@@ -13,12 +13,18 @@ var getMessages = function() {
 	    	str = str.replace('},]', '}]');
 	    	str = $.parseJSON(str);
     		$('#messages tbody').html('');
+    		$('#forms').html('');
     		
 	    	$.each(str, function(key, value) {
 	    		$('#messages tbody').append(
-	    			'<tr><td>'+value.user+'</td>' + 
+	    			'<tr><td><input class="btn btn-danger" type="submit" value="Törlés" form="delete-' + value.id + '"></td>' + 
+	    			'<td>'+value.user+'</td>' + 
 	    			'<td>'+value.message+'</td></tr>'
 	    		);
+	    		$('#forms').append(
+					'<form id="delete-' + value.id + '" style="display: none;" action="deleteMessage" method="post">' + 
+						'<input type="text" name="id" value="' + value.id +'" />' + 
+	  				'</form>');
 	    	});
 	        setTimeout(getMessages, 2500);
 	    }

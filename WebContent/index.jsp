@@ -36,20 +36,7 @@
 	      </tr>
 	    </thead>
 	    <tbody>
-	       <sql:query var="qryMsgs" >
-	                SELECT id, user, message FROM messages;
-	        </sql:query>
-	        
-	        <c:forEach var="row" items="${qryMsgs.rows}">
-	           <tr>
-	             <td>
-	               ${row.user}
-	             </td>
-	             <td>
-	               ${row.message}
-	             </td>
-	           </tr>
-	          </c:forEach>
+	       
 	    </tbody>
 	 </table>
   </div>

@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 
 <script src="jquery-1.12.3.min.js"></script>
-<script src="common.js"></script>
+<script src="admin.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -39,30 +39,12 @@
 	        </td>
 	      </tr>
 	    </thead>
+	    
 	    <tbody>
-	       <sql:query var="qryMsgs" >
-	                SELECT id, user, message FROM messages;
-	        </sql:query>
-	        
-	        <c:forEach var="row" items="${qryMsgs.rows}">
-	           <tr>
-		         <td>
-		           <input type="submit" value="Törlés" form="delete-${row.id}">
-		         </td>
-	             <td>
-	               ${row.user}
-	             </td>
-	             <td>
-	               ${row.message}
-					<form id="delete-${row.id}" style="display: none;" action="deleteMessage" method="post">
-						<input type="text" name="id" value="${row.id}" />
-	  				</form>
-	             </td>
-	           </tr>
-	          </c:forEach>
 	       
 	    </tbody>
 	  </table>
+	  <div id="forms"></div>
 	</div>
 </body>
 
