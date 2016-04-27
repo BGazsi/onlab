@@ -25,7 +25,7 @@
 <body>
   <h1>Hello ${pageContext.request.userPrincipal.name}!</h1>
   <div class="table-responsive">
-	  <table id="messages" width="100%" style="margin-top: 30px;" class="table table-striped">
+	  <table id="messages" style="margin-top: 30px;" class="table table-striped">
 	    <thead>
 	      <tr>
 	        <td width="10%">

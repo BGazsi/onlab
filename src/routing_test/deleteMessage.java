@@ -32,7 +32,7 @@ public class deleteMessage extends HttpServlet {
          System.out.println(sql);
  
          // Get a connection from the pool
-         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/onlab", "root", "adminadmin");
+         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/onlab?autoReconnect=true&useSSL=false", "root", "adminadmin");
  
          // Normal JBDC programming hereafter. Close the Connection to return it to the pool
          stmt = conn.createStatement();

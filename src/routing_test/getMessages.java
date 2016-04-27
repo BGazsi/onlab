@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.json.Json;
-import javax.json.JsonArray;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 import javax.servlet.ServletException;
@@ -32,12 +31,10 @@ public class getMessages extends HttpServlet {
 		Statement  stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-
 			String sql = "SELECT * FROM messages;";
-			System.out.println(sql);
 
 			// Get a connection from the pool
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/onlab", "root", "adminadmin");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/onlab?autoReconnect=true&useSSL=false", "root", "adminadmin");
 
 			// Normal JBDC programming hereafter. Close the Connection to return it to the pool
 			stmt = conn.createStatement();
@@ -47,7 +44,6 @@ public class getMessages extends HttpServlet {
 				int id = rs.getInt("id");
 				String user = rs.getString("user");
 				String message = rs.getString("message");
-				System.out.println(id + "\t" + user + "\t" + message);
 				
 				Map<String, Object> config = new HashMap<String, Object>();
 				JsonBuilderFactory factory = Json.createBuilderFactory(config);
@@ -56,16 +52,11 @@ public class getMessages extends HttpServlet {
 					     .add("user", user)
 					     .add("message", message)
 					     .build();
-
-				 JsonArray array = factory.createArrayBuilder()
-				     .add(value)
-				     .build();
 				out.write(value.toString());
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			out.close();
@@ -76,8 +67,5 @@ public class getMessages extends HttpServlet {
 				ex.printStackTrace();
 			}
 		}
-		
 	}
-
 }
-
