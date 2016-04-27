@@ -1,8 +1,9 @@
 $(document).ready(function() {
-  getMessages();
+	var oldData;
+    getMessages(oldData);
 });
 
-var getMessages = function() {
+var getMessages = function(oldData) {
   $.ajax({
 	    type        :   'GET',
 	    url         :   'getMessages', 
@@ -12,14 +13,19 @@ var getMessages = function() {
 	    	str = str.replace(/\}/g, '},');
 	    	str = str.replace('},]', '}]');
 	    	str = $.parseJSON(str);
-    		$('#messages tbody').html('');
-    		
-	    	$.each(str, function(key, value) {
-	    		$('#messages tbody').append(
-	    			'<tr><td>'+value.user+'</td>' + 
-	    			'<td>'+value.message+'</td></tr>'
-	    		);
-	    	});
+	    	if(typeof(oldData)===undefined){
+	    		oldData = str;
+	    	}
+	    	if(oldData !== str){
+	    		$('#messages tbody').html('');
+	    		
+		    	$.each(str, function(key, value) {
+		    		$('#messages tbody').append(
+		    			'<tr><td>'+value.user+'</td>' + 
+		    			'<td>'+value.message+'</td></tr>'
+		    		);
+		    	});
+	    	}
 	        setTimeout(getMessages, 2500);
 	    }
 	});
